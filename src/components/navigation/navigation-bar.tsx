@@ -1,13 +1,16 @@
 import {
   AppBar,
   Box,
+  BoxProps,
   Button,
+  ButtonProps,
+  Link,
   Toolbar,
   Typography,
   styled,
 } from "@mui/material";
 import { ShoppingCart } from "@mui/icons-material";
-import { FC } from "react";
+import { FC, JSXElementConstructor } from "react";
 
 export const NavigationBar: FC<{
   email?: string;
@@ -16,12 +19,12 @@ export const NavigationBar: FC<{
   return (
     <AppBar component="nav">
       <Toolbar>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+        <NavTitle href="/" variant="h6" sx={{ flexGrow: 1 }}>
           Soap Street
-        </Typography>
-        <Box display="flex" flexWrap="wrap" justifyContent="flex-end">
+        </NavTitle>
+        <NavButtonGroup>
           <NavButton color="inherit" href="/market">
-            Market
+            Products
           </NavButton>
           <NavButton color="inherit" href="/login">
             {email || "Login"}
@@ -35,11 +38,27 @@ export const NavigationBar: FC<{
           >
             My Cart {items}
           </NavButton>
-        </Box>
+        </NavButtonGroup>
       </Toolbar>
     </AppBar>
   );
 };
+
+const NavButtonGroup = styled<JSXElementConstructor<BoxProps>>((props) => (
+  <Box {...props} />
+))(({ theme }) => ({
+  display: "flex",
+  flexDirection: "row",
+  flexWrap: "wrap",
+  justifyContent: "flex-end",
+  gap: theme.spacing(1),
+}));
+
+const NavTitle = styled(Link)(({ theme }) => ({
+  flexGrow: 1,
+  color: theme.palette.common.white,
+  textDecoration: "none",
+}));
 
 const NavButton = styled(Button)(({ theme }) => ({
   textTransform: "none",
