@@ -33,7 +33,7 @@ export default function Login() {
     }
   };
   return (
-    <Layout title="Register" description="Make an account!">
+    <Layout title="Login" description="Log in and make purchases!">
       <RegistrationFooter />
       <Container
         sx={{
