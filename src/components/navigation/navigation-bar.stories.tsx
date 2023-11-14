@@ -7,9 +7,24 @@ const Story: Meta<typeof NavigationBar> = {
 };
 export default Story;
 
-export const LoggedIn = {
+export const LoggedInBuyer = {
   args: {
-    email: "miguel@example.com",
+    user: {
+      id: "1",
+      email: "buyer@example.com",
+      role: "BUYER",
+    },
+    items: 5,
+  },
+};
+
+export const LoggedInSeller = {
+  args: {
+    user: {
+      id: "1",
+      email: "seller@example.com",
+      role: "SELLER",
+    },
     items: 5,
   },
 };

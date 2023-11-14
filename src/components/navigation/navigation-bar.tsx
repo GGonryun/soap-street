@@ -3,19 +3,18 @@ import {
   Box,
   BoxProps,
   Button,
-  ButtonProps,
   Link,
   Toolbar,
-  Typography,
   styled,
 } from "@mui/material";
 import { ShoppingCart } from "@mui/icons-material";
 import { FC, JSXElementConstructor } from "react";
+import { CreatedUserResponse } from "@/types/create-user-form";
 
 export const NavigationBar: FC<{
-  email?: string;
+  user?: { id: string; email: string; role: string };
   items: number;
-}> = ({ email, items }) => {
+}> = ({ user, items }) => {
   return (
     <AppBar component="nav">
       <Toolbar>
@@ -23,11 +22,22 @@ export const NavigationBar: FC<{
           Soap Street
         </NavTitle>
         <NavButtonGroup>
-          <NavButton color="inherit" href="/market">
-            Products
-          </NavButton>
-          <NavButton color="inherit" href="/login">
-            {email || "Login"}
+          {user?.role === "SELLER" && (
+            <NavButton color="inherit" href="/products">
+              Products
+            </NavButton>
+          )}
+          {user && (
+            <NavButton
+              color="inherit"
+              href={user?.role === "SELLER" ? "/orders" : "/purchases"}
+            >
+              {user?.role === "SELLER" ? "Orders" : "Purchases"}
+            </NavButton>
+          )}
+
+          <NavButton color="inherit" href={user?.email ? "/account" : "/login"}>
+            {user?.email || "Login"}
           </NavButton>
           <NavButton
             color="error"

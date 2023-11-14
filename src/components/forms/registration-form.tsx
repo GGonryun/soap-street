@@ -1,3 +1,4 @@
+import { CreateUserForm } from "@/types/create-user-form";
 import { HowToReg } from "@mui/icons-material";
 import {
   Box,
@@ -5,24 +6,26 @@ import {
   ButtonProps,
   InputLabel,
   Link,
+  MenuItem,
+  Select,
   TextField,
   Typography,
   styled,
 } from "@mui/material";
-import { FC, JSXElementConstructor, useState } from "react";
+import { FC, JSXElementConstructor } from "react";
+import { SubmissionButton } from "../buttons/submission-button";
 
 export const RegistrationForm: FC<{
-  onSubmit: (email: string, password: string) => Promise<boolean>;
-}> = ({ onSubmit }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  onSubmit: () => void;
+  onUpdate: (form: CreateUserForm) => void;
+  form: CreateUserForm;
+}> = ({ onSubmit, onUpdate, form }) => {
+  const { email, password, role } = form;
+  const setEmail = (email: string) => onUpdate({ ...form, email });
+  const setPassword = (password: string) => onUpdate({ ...form, password });
+  const setRole = (role: unknown) =>
+    onUpdate({ ...form, role: role as "BUYER" | "SELLER" });
 
-  const handleSubmit = async () => {
-    if (await onSubmit(email, password)) {
-      setEmail("");
-      setPassword("");
-    }
-  };
   return (
     <RegistrationBox>
       <TitleBox>
@@ -35,7 +38,7 @@ export const RegistrationForm: FC<{
           id="email"
           type="email"
           value={email}
-          onChange={(e) => setEmail(e.currentTarget.value)}
+          onChange={(e) => setEmail(e.target.value)}
         />
       </InputBox>
       <InputBox>
@@ -44,16 +47,44 @@ export const RegistrationForm: FC<{
           id="password"
           type="password"
           value={password}
-          onChange={(e) => setPassword(e.currentTarget.value)}
+          onChange={(e) => setPassword(e.target.value)}
         />
       </InputBox>
-      <SubmissionButton onClick={handleSubmit}>Sign Up</SubmissionButton>
+      <InputBox>
+        <DenseInputLabel htmlFor="role">Role</DenseInputLabel>
+        <DenseSelectField
+          id="role"
+          value={role}
+          onChange={(e) => setRole(e.target.value)}
+        >
+          <DenseMenuItem dense value={"BUYER"}>
+            Buyer
+          </DenseMenuItem>
+          <DenseMenuItem dense value={"SELLER"}>
+            Seller
+          </DenseMenuItem>
+        </DenseSelectField>
+      </InputBox>
+      <SubmissionButton startIcon={<HowToReg />} onClick={onSubmit}>
+        Sign Up
+      </SubmissionButton>
       <CaptionLink href="/">
         Nevermind, I&apos;d like to keep shopping as a guest
       </CaptionLink>
     </RegistrationBox>
   );
 };
+
+const DenseSelectField = styled(Select)(({ theme }) => ({
+  "& .MuiSelect-select": {
+    fontSize: "0.7rem",
+    padding: theme.spacing(0.5, 1),
+  },
+}));
+
+const DenseMenuItem = styled(MenuItem)(({ theme }) => ({
+  fontSize: "0.7rem",
+}));
 
 const DenseTextField = styled(TextField)(({ theme }) => ({
   "& .MuiInputBase-root": {
@@ -90,7 +121,7 @@ const RegistrationBox = styled(Box)(({ theme }) => ({
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
-  gap: theme.spacing(2),
+  gap: theme.spacing(1.5),
   height: "100%",
   maxWidth: "400px",
 }));
@@ -114,23 +145,5 @@ const CaptionLink = styled(Link)(({ theme }) => ({
   "&:hover": {
     textDecoration: "underline",
     textDecorationColor: theme.palette.text.secondary,
-  },
-}));
-
-const SubmissionButton = styled<JSXElementConstructor<ButtonProps>>((props) => (
-  <Button
-    startIcon={<HowToReg />}
-    fullWidth
-    type="submit"
-    variant="outlined"
-    color="primary"
-    {...props}
-  />
-))(({ theme }) => ({
-  fontSize: "0.7rem",
-  padding: theme.spacing(0.25),
-  textTransform: "none",
-  "& .MuiSvgIcon-root": {
-    fontSize: "1rem",
   },
 }));

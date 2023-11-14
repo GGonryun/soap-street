@@ -7,6 +7,22 @@ const Story: Meta<typeof RegistrationForm> = {
 };
 export default Story;
 
-export const Primary = {
-  args: {},
+export const Empty = {
+  args: {
+    form: {
+      email: "",
+      password: "",
+      role: "BUYER",
+    },
+  },
+};
+
+export const Seller = {
+  args: {
+    form: {
+      email: "miguel@example.com",
+      password: "1234567890",
+      role: "SELLER",
+    },
+  },
 };
