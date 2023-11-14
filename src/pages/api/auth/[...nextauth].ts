@@ -59,16 +59,4 @@ export default NextAuth({
       return session;
     },
   },
-  cookies: {
-    sessionToken: {
-      name: `next-auth.session-token`,
-      options: {
-        httpOnly: true,
-        sameSite: "lax",
-        path: "/",
-        // support subdomains in production and local development
-        domain: `${process.env.NEXT_PUBLIC_COOKIE_DOMAIN}`,
-      },
-    },
-  },
 });
