@@ -3,7 +3,6 @@ import prisma from "@/prisma";
 
 // import prisma client
 const handler: NextApiHandler = async (req, res) => {
-  console.log("attempting to login", req.method, req.body);
   if (req.method === "POST") {
     try {
       await loginUserHandler(req, res);
@@ -17,7 +16,6 @@ const handler: NextApiHandler = async (req, res) => {
 };
 const loginUserHandler: NextApiHandler = async (req, res) => {
   const { email, password } = req.body;
-  console.log("logging in with credentials", email, password);
   if (!email || !password) {
     return res.status(400).json({ message: "invalid inputs" });
   }
