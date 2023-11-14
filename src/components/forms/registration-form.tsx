@@ -1,19 +1,12 @@
 import { CreateUserForm } from "@/types/create-user-form";
-import { HowToReg } from "@mui/icons-material";
-import {
-  Box,
-  Button,
-  ButtonProps,
-  InputLabel,
-  Link,
-  MenuItem,
-  Select,
-  TextField,
-  Typography,
-  styled,
-} from "@mui/material";
-import { FC, JSXElementConstructor } from "react";
-import { SubmissionButton } from "../buttons/submission-button";
+import { FC } from "react";
+import { ConnectionSkeleton } from "./connection-skeleton";
+import { DenseInputLabel } from "../inputs/dense-input-label";
+import { DenseMenuItem } from "../inputs/dense-menu-item";
+import { DenseSelectField } from "../inputs/dense-select-field";
+import { InputBox } from "../inputs/input-box";
+import { EmailInputField } from "../inputs/email-input-field";
+import { PasswordInputField } from "../inputs/password-input-field";
 
 export const RegistrationForm: FC<{
   onSubmit: () => void;
@@ -27,29 +20,13 @@ export const RegistrationForm: FC<{
     onUpdate({ ...form, role: role as "BUYER" | "SELLER" });
 
   return (
-    <RegistrationBox>
-      <TitleBox>
-        <TitleText variant="h6">The Soap Street</TitleText>
-        <SubTitleText variant="body2">Create Your Account</SubTitleText>
-      </TitleBox>
-      <InputBox>
-        <DenseInputLabel htmlFor="email">Email</DenseInputLabel>
-        <DenseTextField
-          id="email"
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </InputBox>
-      <InputBox>
-        <DenseInputLabel htmlFor="password">Password</DenseInputLabel>
-        <DenseTextField
-          id="password"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </InputBox>
+    <ConnectionSkeleton
+      onSubmit={onSubmit}
+      subtitle="Create your account"
+      submissionText="Sign Up"
+    >
+      <EmailInputField value={email} onUpdate={setEmail} />
+      <PasswordInputField value={password} onUpdate={setPassword} />
       <InputBox>
         <DenseInputLabel htmlFor="role">Role</DenseInputLabel>
         <DenseSelectField
@@ -65,85 +42,6 @@ export const RegistrationForm: FC<{
           </DenseMenuItem>
         </DenseSelectField>
       </InputBox>
-      <SubmissionButton startIcon={<HowToReg />} onClick={onSubmit}>
-        Sign Up
-      </SubmissionButton>
-      <CaptionLink href="/">
-        Nevermind, I&apos;d like to keep shopping as a guest
-      </CaptionLink>
-    </RegistrationBox>
+    </ConnectionSkeleton>
   );
 };
-
-const DenseSelectField = styled(Select)(({ theme }) => ({
-  "& .MuiSelect-select": {
-    fontSize: "0.7rem",
-    padding: theme.spacing(0.5, 1),
-  },
-}));
-
-const DenseMenuItem = styled(MenuItem)(({ theme }) => ({
-  fontSize: "0.7rem",
-}));
-
-const DenseTextField = styled(TextField)(({ theme }) => ({
-  "& .MuiInputBase-root": {
-    fontSize: "0.7rem",
-  },
-  "& .MuiInputBase-input": {
-    fontSize: "0.7rem",
-    padding: theme.spacing(0.5, 1),
-  },
-}));
-
-const DenseInputLabel = styled(InputLabel)(({ theme }) => ({
-  fontSize: "0.7rem",
-  fontWeight: "bold",
-}));
-
-const InputBox = styled(Box)(({ theme }) => ({
-  display: "flex",
-  flexDirection: "column",
-  width: "100%",
-  gap: theme.spacing(0.5),
-}));
-
-const TitleBox = styled(Box)(({ theme }) => ({
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  justifyContent: "center",
-  gap: theme.spacing(0.5),
-}));
-
-const RegistrationBox = styled(Box)(({ theme }) => ({
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  justifyContent: "center",
-  gap: theme.spacing(1.5),
-  height: "100%",
-  maxWidth: "400px",
-}));
-
-const TitleText = styled(Typography)(({ theme }) => ({
-  letterSpacing: "0.3rem",
-  fontWeight: "bold",
-  textTransform: "uppercase",
-}));
-
-const SubTitleText = styled(Typography)(({ theme }) => ({
-  textTransform: "uppercase",
-  color: theme.palette.text.secondary,
-}));
-
-const CaptionLink = styled(Link)(({ theme }) => ({
-  textDecoration: "none",
-  fontFamily: theme.typography.fontFamily,
-  color: theme.palette.text.secondary,
-  fontSize: "0.7rem",
-  "&:hover": {
-    textDecoration: "underline",
-    textDecorationColor: theme.palette.text.secondary,
-  },
-}));

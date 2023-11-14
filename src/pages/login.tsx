@@ -1,25 +1,20 @@
 import { Container } from "@mui/material";
 import { Layout } from "@/components/layout/layout";
-import { trpc } from "@/trpc/client";
+import { RegistrationFooter } from "@/components/footer/registration-footer";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { CreateUserForm } from "@/types/create-user-form";
-import { RegistrationForm } from "@/components/forms/registration-form";
 import { signIn } from "next-auth/react";
-import { ConnectionFooter } from "@/components/footer/connection-footer";
+import { ConnectUserForm } from "@/types/connect-user-form";
+import { LogInForm } from "@/components/forms/login-form";
 
-export default function Register() {
+export default function Login() {
   const { push } = useRouter();
-  const [form, setForm] = useState<CreateUserForm>({
+  const [form, setForm] = useState<ConnectUserForm>({
     email: "",
     password: "",
-    role: "BUYER",
   });
-  const registerUser = trpc.users.register.useMutation();
   const handleSubmission = async () => {
     try {
-      const result = await registerUser.mutateAsync(form);
-      console.log(`Created user ${result.email} with id ${result.id}`);
       let res = await signIn("credentials", {
         email: form.email,
         password: form.password,
@@ -29,15 +24,17 @@ export default function Register() {
       if (res?.ok) {
         push("/");
       } else {
-        alert("Failed to register: " + res?.error);
+        alert("Invalid credentials");
       }
     } catch (error) {
-      alert("Failed to register: " + error);
+      alert("Failed to log in");
+      console.error(error);
+      return false;
     }
   };
   return (
     <Layout title="Register" description="Make an account!">
-      <ConnectionFooter />
+      <RegistrationFooter />
       <Container
         sx={{
           display: "grid",
@@ -46,11 +43,7 @@ export default function Register() {
           height: "50vh",
         }}
       >
-        <RegistrationForm
-          onSubmit={handleSubmission}
-          onUpdate={setForm}
-          form={form}
-        />
+        <LogInForm onSubmit={handleSubmission} onUpdate={setForm} form={form} />
       </Container>
     </Layout>
   );

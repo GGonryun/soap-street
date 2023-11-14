@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const createUserFormSchema = z.object({
   email: z.string().email(),
-  password: z.string().min(8),
+  password: z.string().min(3),
   role: z.union([z.literal("SELLER"), z.literal("BUYER")]),
 });
 

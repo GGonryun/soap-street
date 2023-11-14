@@ -16,6 +16,6 @@ export const SubmissionButton = styled<JSXElementConstructor<ButtonProps>>(
   padding: theme.spacing(0.25),
   textTransform: "none",
   "& .MuiSvgIcon-root": {
-    fontSize: "1rem",
+    fontSize: "1rem !important",
   },
 }));
