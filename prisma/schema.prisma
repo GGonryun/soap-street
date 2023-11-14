@@ -44,8 +44,8 @@ enum UserRole {
 
 model User {
   id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
+  email         String    @unique
+  password      String    @db.Text
   role          UserRole  @default(BUYER)
   accounts      Account[]
   sessions      Session[]
