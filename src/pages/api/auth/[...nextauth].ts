@@ -22,7 +22,11 @@ export default NextAuth({
           password: credentials?.password,
         };
 
-        const res = await fetch(`${getBaseUrl()}/api/user/login`, {
+        const url = `${getBaseUrl()}/api/user/login`;
+
+        console.log("logging in", url, userCredentials);
+
+        const res = await fetch(url, {
           method: "POST",
           body: JSON.stringify(userCredentials),
           headers: {
@@ -30,7 +34,7 @@ export default NextAuth({
           },
         });
 
-        console.log("finished logging in", res);
+        console.log("finished logging in", res.status);
 
         const user: CreatedUserResponse = await res.json();
 
