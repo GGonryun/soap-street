@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 import { NavigationBar } from "../navigation/navigation-bar";
 import { useShoppingCart } from "@/hooks/useShoppingCart";
 import { Box, Container, CssBaseline, Toolbar } from "@mui/material";
@@ -7,7 +7,7 @@ import { Box, Container, CssBaseline, Toolbar } from "@mui/material";
 export const Layout: FC<{
   title: string;
   description?: string;
-  children: JSX.Element[];
+  children: ReactNode | ReactNode[];
 }> = ({ children, title, description }) => {
   const cart = useShoppingCart();
   return (
