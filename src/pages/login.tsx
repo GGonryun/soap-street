@@ -24,6 +24,7 @@ export default function Login() {
       if (res?.ok) {
         push("/");
       } else {
+        console.log("failed to login", res);
         alert("Invalid credentials");
       }
     } catch (error) {
