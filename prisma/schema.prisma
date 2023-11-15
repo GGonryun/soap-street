@@ -49,6 +49,18 @@ model User {
   role          UserRole  @default(BUYER)
   accounts      Account[]
   sessions      Session[]
+  products      Product[]
+}
+
+model Product {
+  id          String   @id @default(cuid())
+  name        String
+  description String?  @db.Text
+  price       Float
+  quantity    Int
+  imageUrl    String
+  sellerId    String
+  seller      User     @relation(fields: [sellerId], references: [id], onDelete: Cascade)
 }
 
 model VerificationToken {
