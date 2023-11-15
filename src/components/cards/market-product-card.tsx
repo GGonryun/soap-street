@@ -11,7 +11,8 @@ export const MarketProductCard: FC<{
   const cart = useShoppingCart();
 
   const filterProductQuantity = (product: ProductObject): number => {
-    const quantity = cart.items.filter((item) => item === product.id).length;
+    const quantity =
+      cart.items?.filter((item) => item === product.id).length ?? 0;
 
     return Math.max(product.quantity - quantity, 0);
   };

@@ -9,7 +9,7 @@ export default function Home() {
   const cart = useShoppingCart();
   const handleAction = (id: string) => {
     // add to cart
-    cart.setItems((items) => [...items, id]);
+    cart.addItem(id);
   };
 
   const { data: products } = trpc.products.market.useQuery();

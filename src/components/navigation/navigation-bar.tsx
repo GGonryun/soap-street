@@ -9,7 +9,6 @@ import {
 } from "@mui/material";
 import { ShoppingCart } from "@mui/icons-material";
 import { FC, JSXElementConstructor } from "react";
-import { CreatedUserResponse } from "@/types/create-user-form";
 
 export const NavigationBar: FC<{
   user?: { id: string; email: string; role: string };

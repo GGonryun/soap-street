@@ -1,38 +1,28 @@
-import {
-  createContext,
-  Dispatch,
-  FC,
-  ReactNode,
-  SetStateAction,
-  useContext,
-  useState,
-} from "react";
-
-export type ShoppingCart = {
-  items: string[]; // id of item
-  setItems: Dispatch<SetStateAction<string[]>>;
-};
-
-export const DEFAULT_CART: ShoppingCart = {
-  items: [],
-  setItems: () => {},
-};
-
-export const ShoppingCartContext = createContext(DEFAULT_CART);
-
-export const ShoppingCartProvider: FC<{ children: ReactNode }> = ({
-  children,
-}) => {
-  // TODO: add support for cookies, so that refreshing doesn't reset state
-  const [items, setItems] = useState<string[]>([]);
-
-  return (
-    <ShoppingCartContext.Provider value={{ items, setItems }}>
-      {children}
-    </ShoppingCartContext.Provider>
-  );
-};
+import { useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
 
 export const useShoppingCart = () => {
-  return useContext(ShoppingCartContext);
+  // TODO: add support for cookies, so that refreshing doesn't reset state
+  const [cookies, setCookie] = useCookies(["shopping-cart"]);
+
+  const items: string[] = cookies["shopping-cart"] ?? [];
+
+  // used to trick nextjs into client-side rendering
+
+  const addItem = (item: string) => {
+    const items = cookies["shopping-cart"] ?? [];
+
+    setCookie("shopping-cart", [...items, item]);
+  };
+  const removeItem = (item: string) => {
+    const items: string[] = cookies["shopping-cart"] ?? [];
+    const index = items.indexOf(item);
+    if (index > -1) {
+      items.splice(index, 1);
+    }
+
+    setCookie("shopping-cart", items);
+  };
+
+  return { items, removeItem, addItem };
 };
