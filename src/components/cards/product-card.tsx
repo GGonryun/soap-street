@@ -5,10 +5,20 @@ import { ResponsiveImage } from "../images/responsive-image";
 
 export const ProductCard: FC<
   ProductObject & {
-    onClick: () => void;
+    onClick?: () => void;
+    href?: string;
     children: React.ReactNode;
   }
-> = ({ children, onClick, name, description, price, quantity, imageUrl }) => {
+> = ({
+  children,
+  href,
+  onClick,
+  name,
+  description,
+  price,
+  quantity,
+  imageUrl,
+}) => {
   return (
     <Paper variant="outlined">
       <Box
@@ -26,7 +36,9 @@ export const ProductCard: FC<
         </Box>
       </Box>
       <Box display="flex" flexDirection="column" gap={1} p={1}>
-        <ProductNameLink onClick={onClick}>{name}</ProductNameLink>
+        <ProductNameLink href={href} onClick={onClick}>
+          {name}
+        </ProductNameLink>
         <ProductDescription>{description}</ProductDescription>
         <Box display="flex" justifyContent="space-between">
           <ProductPrice>${price}</ProductPrice>

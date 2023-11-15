@@ -20,7 +20,11 @@ export const MarketProductCard: FC<{
   const quantity = filterProductQuantity(product);
 
   return (
-    <ProductCard {...product} quantity={quantity} onClick={onClick}>
+    <ProductCard
+      {...product}
+      quantity={quantity}
+      href={`/product/${product.id}`}
+    >
       <Box display="flex" flexDirection="column" gap={1}>
         <Typography variant="caption">
           Sold By:{" "}
