@@ -5,21 +5,23 @@ import { DenseInputLabel } from "../inputs/dense-input-label";
 import { DenseTextField } from "../inputs/dense-text-field";
 import { DenseTextAreaField } from "../inputs/dense-text-area-field";
 import { SubmissionButton } from "../buttons/submission-button";
-import { Add } from "@mui/icons-material";
+import { Add, DeleteOutline, EditOutlined } from "@mui/icons-material";
 import { CreateProductForm } from "@/types/create-product-form";
 
 type CreateProductModalProps = {
   open: boolean;
   form: CreateProductForm;
+  editing: boolean;
   onUpdateForm: (form: CreateProductForm) => void;
   onClose: () => void;
   onSubmit: () => void;
+  onDelete: () => void;
 };
 
 export const CreateProductModal = forwardRef<
   HTMLInputElement,
   CreateProductModalProps
->(({ open, onClose, onSubmit, form, onUpdateForm }, ref) => {
+>(({ open, onClose, onSubmit, form, onUpdateForm, editing, onDelete }, ref) => {
   const { name, description, price, quantity } = form;
 
   const setName = (name: string) => onUpdateForm({ ...form, name });
@@ -75,7 +77,7 @@ export const CreateProductModal = forwardRef<
             minRows={3}
             placeholder="This is an awesome product"
             id="product-description"
-            value={description}
+            value={description ?? ""}
             onChange={(e) => setDescription(e.target.value)}
           />
         </InputBox>
@@ -104,25 +106,33 @@ export const CreateProductModal = forwardRef<
             onChange={(e) => setPrice(parseFloat(e.target.value))}
           />
         </InputBox>
-        <InputBox>
-          <DenseInputLabel required htmlFor="product-image">
-            Image
-          </DenseInputLabel>
-          <input
-            ref={ref}
-            accept="image/*"
-            id="product-image"
-            multiple={false}
-            type="file"
-          />
-        </InputBox>
+        {!editing && (
+          <InputBox>
+            <DenseInputLabel required htmlFor="product-image">
+              Image
+            </DenseInputLabel>
+            <input
+              ref={ref}
+              accept="image/*"
+              id="product-image"
+              multiple={false}
+              type="file"
+            />
+          </InputBox>
+        )}
         <SubmissionButton
-          color="inherit"
-          startIcon={<Add />}
-          sx={{ mt: 1 }}
-          onClick={() => onSubmit()}
+          startIcon={editing ? <EditOutlined /> : <Add />}
+          sx={{ my: 1 }}
+          onClick={onSubmit}
         >
-          Create Product
+          {editing ? "Edit Product" : "Create Product"}
+        </SubmissionButton>
+        <SubmissionButton
+          startIcon={<DeleteOutline />}
+          color="error"
+          onClick={onDelete}
+        >
+          Delete Product
         </SubmissionButton>
       </Paper>
     </Modal>

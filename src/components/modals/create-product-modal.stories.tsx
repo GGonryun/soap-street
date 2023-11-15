@@ -30,3 +30,16 @@ export const FilledForm = {
     },
   },
 };
+
+export const EditingForm = {
+  args: {
+    open: true,
+    editing: true,
+    form: {
+      name: "My Awesome Product",
+      description: "This is an awesome product",
+      price: 9.99,
+      quantity: 12,
+    },
+  },
+};
