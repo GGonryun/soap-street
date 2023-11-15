@@ -15,7 +15,6 @@ export const EmptyForm = {
       description: "",
       price: 0,
       quantity: 0,
-      status: "",
     },
   },
 };
@@ -28,7 +27,6 @@ export const FilledForm = {
       description: "This is an awesome product",
       price: 9.99,
       quantity: 12,
-      status: "",
     },
   },
 };

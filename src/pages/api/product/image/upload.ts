@@ -5,7 +5,7 @@ export default async function handler(
   request: NextApiRequest,
   response: NextApiResponse
 ) {
-  const blob = await put(request.query.filename as string, request.body, {
+  const blob = await put(request.query.filename as string, request, {
     access: "public",
   });
 
