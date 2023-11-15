@@ -1,18 +1,16 @@
-import { privateProcedure } from "@/trpc/server/trpc";
+import { publicProcedure } from "@/trpc/server/trpc";
 import { productObjectSchema } from "@/types/create-product-form";
 import { z } from "zod";
 
-export default privateProcedure
+export default publicProcedure
   .input(
     z.object({
       id: z.string(),
     })
   )
   .output(productObjectSchema.omit({ seller: true }).nullable())
-  .query(async ({ ctx: { user, db }, input: { id } }) => {
+  .query(async ({ ctx: { db }, input: { id } }) => {
     try {
-      if (!user.id) throw new Error("User not found");
-
       const item = await db.product.findUnique({
         where: {
           id,

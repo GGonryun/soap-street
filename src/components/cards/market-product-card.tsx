@@ -3,6 +3,7 @@ import { FC } from "react";
 import { ProductCard } from "./product-card";
 import { useShoppingCart } from "@/hooks/useShoppingCart";
 import { Box, Button, Link, Typography } from "@mui/material";
+import { filterProductQuantity } from "@/util/product";
 
 export const MarketProductCard: FC<{
   product: ProductObject;
@@ -10,14 +11,7 @@ export const MarketProductCard: FC<{
 }> = ({ product, onClick }) => {
   const cart = useShoppingCart();
 
-  const filterProductQuantity = (product: ProductObject): number => {
-    const quantity =
-      cart.items?.filter((item) => item === product.id).length ?? 0;
-
-    return Math.max(product.quantity - quantity, 0);
-  };
-
-  const quantity = filterProductQuantity(product);
+  const quantity = filterProductQuantity(cart.items, product);
 
   return (
     <ProductCard

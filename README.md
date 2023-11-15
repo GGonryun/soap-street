@@ -21,3 +21,17 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 - Components: Material UI
 - API: tRPC
 - Frontend Workshop: Storybook.js
+
+## What's missing?
+
+- Unit Tests
+- End-to-end Tests
+- Continuous Integration/Deployment
+- Realtime updates
+- Mobile responsive design
+- SEO
+- Analytics
+- Error reporting
+- Logging
+- Monitoring
+- Caching
