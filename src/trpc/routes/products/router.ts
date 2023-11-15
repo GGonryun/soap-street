@@ -4,6 +4,7 @@ import get from "./get";
 import edit from "./edit";
 import archive from "./archive";
 import list from "./list";
+import market from "./market";
 
 export default t.router({
   get,
@@ -11,4 +12,5 @@ export default t.router({
   edit,
   list,
   archive,
+  market,
 });

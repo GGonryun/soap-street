@@ -1,10 +1,8 @@
-import { Box, Button, Divider, Link, Typography } from "@mui/material";
+import { Box, Divider, Typography } from "@mui/material";
 import { Layout } from "@/components/layout/layout";
 import { RegistrationFooter } from "@/components/footer/registration-footer";
-import { ProductCard } from "@/components/cards/product-card";
 import { useShoppingCart } from "@/hooks/useShoppingCart";
 import { trpc } from "@/trpc/client";
-import { ProductObject } from "@/types/create-product-form";
 import { MarketProductCard } from "@/components/cards/market-product-card";
 
 export default function Home() {
@@ -14,13 +12,7 @@ export default function Home() {
     cart.setItems((items) => [...items, id]);
   };
 
-  const filterProductQuantity = (product: ProductObject): number => {
-    const quantity = cart.items.filter((item) => item === product.id).length;
-
-    return Math.max(product.quantity - quantity, 0);
-  };
-
-  const { data: products } = trpc.products.list.useQuery();
+  const { data: products } = trpc.products.market.useQuery();
 
   return (
     <Layout
