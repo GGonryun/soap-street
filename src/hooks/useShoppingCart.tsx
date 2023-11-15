@@ -1,13 +1,16 @@
-import { createContext, FC, ReactNode, useContext, useState } from "react";
-
-export type ShoppingItem = {
-  id: string;
-  quantity: number;
-};
+import {
+  createContext,
+  Dispatch,
+  FC,
+  ReactNode,
+  SetStateAction,
+  useContext,
+  useState,
+} from "react";
 
 export type ShoppingCart = {
-  items: ShoppingItem[];
-  setItems: (items: ShoppingItem[]) => void;
+  items: string[]; // id of item
+  setItems: Dispatch<SetStateAction<string[]>>;
 };
 
 export const DEFAULT_CART: ShoppingCart = {
@@ -20,7 +23,9 @@ export const ShoppingCartContext = createContext(DEFAULT_CART);
 export const ShoppingCartProvider: FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [items, setItems] = useState<ShoppingItem[]>([]);
+  // TODO: add support for cookies, so that refreshing doesn't reset state
+  const [items, setItems] = useState<string[]>([]);
+
   return (
     <ShoppingCartContext.Provider value={{ items, setItems }}>
       {children}
@@ -29,6 +34,5 @@ export const ShoppingCartProvider: FC<{ children: ReactNode }> = ({
 };
 
 export const useShoppingCart = () => {
-  const cart = useContext(ShoppingCartContext);
-  return cart;
+  return useContext(ShoppingCartContext);
 };

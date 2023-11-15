@@ -23,10 +23,7 @@ export const Layout: FC<{
 
       <Box display="flex">
         <CssBaseline />
-        <NavigationBar
-          user={session.data?.user}
-          items={cart.items.reduce((acc, i) => i.quantity + acc, 0)}
-        />
+        <NavigationBar user={session.data?.user} items={cart.items.length} />
         <Box component="main">
           <Toolbar />
           <Container sx={{ pt: 1 }}>{children}</Container>
