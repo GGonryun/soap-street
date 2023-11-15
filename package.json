@@ -20,10 +20,11 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.16",
     "@mui/material": "^5.14.17",
-    "@prisma/client": "^5.5.2",
+    "@prisma/client": "^5.6.0",
     "@trpc/client": "^10.43.3",
     "@trpc/next": "^10.43.3",
     "@trpc/server": "^10.43.3",
+    "@vercel/blob": "^0.15.1",
     "next": "14.0.2",
     "next-auth": "^4.24.5",
     "react": "^18",
@@ -45,7 +46,7 @@
     "eslint": "^8",
     "eslint-config-next": "14.0.2",
     "eslint-plugin-storybook": "^0.6.15",
-    "prisma": "^5.5.2",
+    "prisma": "^5.6.0",
     "storybook": "^7.5.3",
     "typescript": "^5"
   }
