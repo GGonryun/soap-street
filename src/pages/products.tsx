@@ -26,7 +26,7 @@ export default function Products() {
 
   return (
     <>
-      <Layout title="Products" description="Make an account!">
+      <Layout title="Products" description="Sell your goods">
         <Container sx={{ pt: 3 }}>
           <Box display="flex" justifyContent="space-between">
             <SectionText>Your Products</SectionText>

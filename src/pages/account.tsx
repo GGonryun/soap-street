@@ -10,7 +10,7 @@ export default function Account() {
   if (!session.data?.user) return <Box>Not logged in</Box>;
 
   return (
-    <Layout title="Register" description="Make an account!">
+    <Layout title="Account" description="View account information">
       <UserAccount
         onSignOut={() => signOut()}
         email={session.data?.user?.email}

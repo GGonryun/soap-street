@@ -36,7 +36,7 @@ export default function Register() {
     }
   };
   return (
-    <Layout title="Register" description="Make an account!">
+    <Layout title="Register" description="Make an account">
       <ConnectionFooter />
       <Container
         sx={{
