@@ -12,6 +12,7 @@ const Purchases: FC = () => {
       description="View a list of your purchases as a user"
     >
       <Container>
+        {purchases?.length === 0 && <p>No purchases found</p>}
         <Box display="flex" flexWrap={"wrap"} gap={1}>
           {purchases?.map((purchase, i) => (
             <PurchaseOrder key={purchase.id} index={i} {...purchase} />

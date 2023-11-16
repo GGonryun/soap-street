@@ -32,6 +32,7 @@ const Orders: FC = () => {
         description="View a list of your pending as a seller"
       >
         <Container>
+          {orders?.length === 0 && <p>No orders found</p>}
           <Box display="flex" flexWrap={"wrap"} gap={1}>
             {orders?.map((order) => (
               <OrderCard

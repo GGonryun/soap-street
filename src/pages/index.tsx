@@ -26,7 +26,7 @@ export default function Home() {
       <Divider sx={{ my: 1 }} />
       <Box display="flex" gap={1} flexWrap={"wrap"} py={1}>
         {products?.map((product) => (
-          <Box key={product.id} flex={1} maxWidth={400} minWidth={200}>
+          <Box key={product.id} flex={1} maxWidth={400} minWidth={300}>
             <MarketProductCard
               product={product}
               onClick={() => handleAction(product.id)}
