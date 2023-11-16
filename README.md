@@ -11,6 +11,16 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 7. (optional) Start the storybook server: `npm run storybook`
 8. (optional) Start the prisma studio server: `npm run prisma:studio`
 
+### Testing
+
+1. Log in as one of the three available users. The password for all three users is `1234`.
+   1. The buyer is `buyer@example.com`
+   2. The first seller is `seller1@example.com`
+   3. The second seller is `seller2@example.com`
+2. Use the seller accounts to create new listings and view pending orders.
+   1. Seller's can mark orders as shipped from the pending orders page.
+3. Use the buyer account to add listings to your cart and complete checkout.
+
 ### User Stories
 
 1. As a user, I want to be able to create an account
