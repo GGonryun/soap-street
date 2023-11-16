@@ -21,17 +21,21 @@ export const NavigationBar: FC<{
           Soap Street
         </NavTitle>
         <NavButtonGroup>
+          {user && (
+            <NavButton color="inherit" href={"/purchases"}>
+              Purchases
+            </NavButton>
+          )}
+
           {user?.role === "SELLER" && (
             <NavButton color="inherit" href="/products">
               Products
             </NavButton>
           )}
-          {user && (
-            <NavButton
-              color="inherit"
-              href={user?.role === "SELLER" ? "/orders" : "/purchases"}
-            >
-              {user?.role === "SELLER" ? "Orders" : "Purchases"}
+
+          {user?.role === "SELLER" && (
+            <NavButton color="inherit" href="/orders">
+              Orders
             </NavButton>
           )}
 

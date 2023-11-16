@@ -39,7 +39,7 @@ const PurchaseOrder: FC<{
       }}
     >
       <Link href={`/purchases/${id}`}>
-        <Typography variant="h6">Purchase: #{index}</Typography>
+        <Typography variant="h6">Purchase: #{index + 1}</Typography>
       </Link>
       <CaptionText variant="body1">Date: {createdAt}</CaptionText>
       <CaptionText variant="body1">Status: {status} </CaptionText>
