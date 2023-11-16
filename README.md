@@ -3,13 +3,16 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 ## Getting Started
 
 1. Install all dependencies `npm i`
-2. Create a PostgresQL database on Vercel
-3. Pull your configuration from vercel: `vercel env pull .env`
-4. Generate the prisma schema: `npm run prisma:generate`
-5. Push your prisma schema to the database: `npm run prisma:push`
-6. Run the development server: `npm run start`
-7. (optional) Start the storybook server: `npm run storybook`
-8. (optional) Start the prisma studio server: `npm run prisma:studio`
+2. Create a new project on Vercel: https://vercel.com/new. 
+   1. Create a PostgresQL database on Vercel and attach it to your project.
+   2. Create a Vercel Blob Storage instance on Vercel and attach it to your project.
+3. Log into vercel on your local environment `vercel login <email>`
+4. Pull your configuration from vercel: `vercel env pull .env`
+5. Generate the prisma schema: `npm run prisma:generate`
+6. Push your prisma schema to the database: `npm run prisma:push`
+7. Run the development server: `npm run start`
+8. (optional) Start the storybook server: `npm run storybook`
+9. (optional) Start the prisma studio server: `npm run prisma:studio`
 
 ### Testing
 
