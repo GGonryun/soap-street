@@ -11,6 +11,34 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 7. (optional) Start the storybook server: `npm run storybook`
 8. (optional) Start the prisma studio server: `npm run prisma:studio`
 
+### User Stories
+
+1. As a user, I want to be able to create an account
+2. As a user, I want to be able to login to my account
+3. As a user, I want to be able to logout of my account
+4. As a seller, I want to be able to create a listing
+5. As a seller, I want to be able to edit a listing
+6. As a seller, I want to be able to delete a listing
+7. As a user, I want to be able to view a seller's profile
+8. As a user, I want to be able to view a listings details
+9. As a buyer, I want to be able to view a listing
+10. As a buyer, I want to be able to add a listing to my cart
+
+--- Progress ---
+
+11. As a buyer, I want to be able to remove a listing from my cart
+12. As a buyer, I want to be able to checkout
+13. As a buyer, I want to be able to view my orders
+14. As a seller, I want to be able to view pending orders
+15. As a seller, I want to be able to mark an order as shipped
+
+Stretch Goals:
+
+1. As a user, I want to be able to search for listings
+2. As a user, I want to be able to filter listings
+3. As a user, I want to be able to review a product
+4. As a user, I want to be able to add a product to my wishlist
+
 ## Technologies
 
 - Database: Prisma + PostgresQL
@@ -35,3 +63,4 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 - Logging
 - Monitoring
 - Caching
+- Keyboard Shortcuts
