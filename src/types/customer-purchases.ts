@@ -1,9 +1,6 @@
 import { z } from "zod";
+import { groupedProductObject } from "./create-product-form";
 import { createdUserResponseSchema } from "./create-user-form";
-import {
-  productObjectSchema,
-  simpleProductObject,
-} from "./create-product-form";
 
 export const statusSchema = z.enum([
   "PENDING",
@@ -24,8 +21,8 @@ export const detailedOrderSchema = orderSchema.extend({
   purchaseId: z.string(),
   createdAt: z.date(),
   updatedAt: z.date(),
-  seller: z.string(),
-  products: z.array(simpleProductObject),
+  seller: createdUserResponseSchema,
+  products: z.array(groupedProductObject),
 });
 
 export type DetailedOrder = z.infer<typeof detailedOrderSchema>;

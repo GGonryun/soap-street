@@ -1,5 +1,6 @@
 import { publicProcedure } from "@/trpc/server/trpc";
 import {
+  GroupedProductObject,
   ProductObject,
   SimpleProductObject,
 } from "@/types/create-product-form";
@@ -47,13 +48,30 @@ export default publicProcedure
     });
 
     const orders: DetailedOrder[] = purchase.orders.map((order) => {
-      const productsMap = order.productIds
-        .map((productId) => products.find((p) => p.id === productId))
-        .filter(Boolean) as SimpleProductObject[];
+      const quantities = order.productIds.reduce((acc, curr) => {
+        if (acc[curr]) {
+          acc[curr] += 1;
+        } else {
+          acc[curr] = 1;
+        }
+        return acc;
+      }, {} as Record<string, number>);
+
+      const productsMap: GroupedProductObject[] = [];
+      for (const key in quantities) {
+        const quantity = quantities[key];
+        const product = products.find((p) => p.id === key);
+        if (!product) continue;
+
+        productsMap.push({
+          ...product,
+          quantity,
+        });
+      }
 
       const o = {
         ...order,
-        seller: order.seller.email,
+        seller: order.seller,
         products: productsMap,
       };
       return o;

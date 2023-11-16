@@ -3,7 +3,14 @@ import { CaptionText } from "@/components/typography/caption-text";
 import { trpc } from "@/trpc/client";
 import { DetailedOrder } from "@/types/customer-purchases";
 import { ArrowBack } from "@mui/icons-material";
-import { Box, Button, Container, Typography, styled } from "@mui/material";
+import {
+  Box,
+  Button,
+  Container,
+  Link,
+  Typography,
+  styled,
+} from "@mui/material";
 import { useRouter } from "next/router";
 import { FC } from "react";
 
@@ -24,13 +31,24 @@ const Purchase: FC = () => {
       title="Purchase"
       description="View details about a specific purchase"
     >
-      <Container>
+      <Container
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "flex-start",
+          gap: 2,
+        }}
+      >
+        <Button startIcon={<ArrowBack />} onClick={handleBackButton}>
+          Back
+        </Button>
         <Box>
-          <Button startIcon={<ArrowBack />} onClick={handleBackButton}>
-            Back
-          </Button>
-          <Typography>Purchase: {purchaseId}</Typography>
-          <Typography>Created At: {purchase?.createdAt}</Typography>
+          <Typography variant="body2">
+            <b>Purchase ID:</b> {purchaseId}
+          </Typography>
+          <Typography variant="body2">
+            <b>Created At:</b> {purchase?.createdAt}
+          </Typography>
         </Box>
         <Box display="flex" flexWrap={"wrap"} gap={1}>
           {purchase?.orders.map((order) => (
@@ -47,15 +65,7 @@ const OrderCard: FC<
     createdAt: string;
     updatedAt: string;
   }
-> = ({
-  id: orderId,
-  createdAt,
-  trackingId,
-  status,
-  productIds,
-  products,
-  seller,
-}) => {
+> = ({ id: orderId, createdAt, trackingId, status, products, seller }) => {
   return (
     <Box
       sx={{
@@ -65,22 +75,29 @@ const OrderCard: FC<
       }}
     >
       <SmallText>
-        <u>Order:</u> {orderId}
+        <u>Order ID:</u> {orderId}
+      </SmallText>
+      <SmallText>
+        <u>Seller:</u> <Link href={`/seller/${seller.id}`}>{seller.email}</Link>
       </SmallText>
       <SmallText>
         <u>Date:</u> {createdAt}
       </SmallText>
       <SmallText>
-        <u>Status:</u> {status}{" "}
+        <u>Status:</u> {status}
       </SmallText>
       <SmallText>
-        <u>Tracking ID:</u> {trackingId}{" "}
+        <u>Tracking ID:</u> {trackingId}
+      </SmallText>
+      <SmallText whiteSpace="pre">
+        <u>Products:</u> <br />
+        {products
+          .map((p) => `${p.name} x ${p.quantity} @ ${p.price}`)
+          .join("\n")}
       </SmallText>
       <SmallText>
-        <u>Products:</u> {products.map((p) => `${p.name}`).join(", ")}
-      </SmallText>
-      <SmallText>
-        <u>Seller:</u> {seller}{" "}
+        <u>Total:</u> $
+        {products.reduce((acc, p) => acc + p.price * p.quantity, 0)}
       </SmallText>
     </Box>
   );

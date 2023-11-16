@@ -20,8 +20,13 @@ export const simpleProductObject = productObjectSchema.omit({
   description: true,
   quantity: true,
 });
-
 export type SimpleProductObject = z.infer<typeof simpleProductObject>;
+
+export const groupedProductObject = productObjectSchema.omit({
+  seller: true,
+  description: true,
+});
+export type GroupedProductObject = z.infer<typeof groupedProductObject>;
 
 export type ProductObject = z.infer<typeof productObjectSchema>;
 
