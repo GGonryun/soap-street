@@ -9,7 +9,7 @@ import { filterProductQuantity } from "@/util/product";
 import { ProductObject } from "@/types/create-product-form";
 
 export default function Product() {
-  const { query, push } = useRouter();
+  const { query, back } = useRouter();
   const cart = useShoppingCart();
 
   const product = trpc.products.get.useQuery({
@@ -36,7 +36,7 @@ export default function Product() {
   };
 
   const handleBack = () => {
-    push("/");
+    back();
   };
 
   return (
@@ -51,7 +51,7 @@ export default function Product() {
         }}
       >
         <Button onClick={handleBack} startIcon={<ArrowBack />}>
-          Browse Marketplace
+          Back
         </Button>
         <Box
           display="flex"

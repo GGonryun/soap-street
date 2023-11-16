@@ -13,6 +13,16 @@ export const productObjectSchema = z.object({
   }),
 });
 
+// TODO: better name, this product object omits several properties
+// but the word "simple" doesn't accurately reflect that.
+export const simpleProductObject = productObjectSchema.omit({
+  seller: true,
+  description: true,
+  quantity: true,
+});
+
+export type SimpleProductObject = z.infer<typeof simpleProductObject>;
+
 export type ProductObject = z.infer<typeof productObjectSchema>;
 
 export const createProductFormSchema = productObjectSchema.omit({

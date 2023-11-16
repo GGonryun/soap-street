@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 
 export const useShoppingCart = () => {
@@ -12,7 +11,9 @@ export const useShoppingCart = () => {
   const addItem = (item: string) => {
     const items = cookies["shopping-cart"] ?? [];
 
-    setCookie("shopping-cart", [...items, item]);
+    setCookie("shopping-cart", [...items, item], {
+      path: "/",
+    });
   };
   const removeItem = (item: string) => {
     const items: string[] = cookies["shopping-cart"] ?? [];
