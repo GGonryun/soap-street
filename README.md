@@ -36,11 +36,10 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 11. As a buyer, I want to be able to remove a listing from my cart
 12. As a buyer, I want to complete checkout
 13. As a buyer, I want to be able to view my orders
-
---- Progress ---
-
 14. As a seller, I want to be able to view pending orders
 15. As a seller, I want to be able to mark an order as shipped
+
+--- Progress ---
 
 Stretch Goals:
 
