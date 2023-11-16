@@ -4,6 +4,7 @@ import { FC } from "react";
 export const ResponsiveImage: FC<ImageProps> = ({ alt, src }) => {
   return (
     <Image
+      priority
       alt={alt}
       src={src}
       width={0}
