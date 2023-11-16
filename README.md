@@ -24,22 +24,22 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 9. As a buyer, I want to be able to view a listing
 10. As a buyer, I want to be able to add a listing to my cart
 11. As a buyer, I want to be able to remove a listing from my cart
+12. As a buyer, I want to complete checkout
+13. As a buyer, I want to be able to view my orders
 
 --- Progress ---
 
-12. As a buyer, I want to be able to checkout
-13. As a buyer, I want to be able to view my orders
 14. As a seller, I want to be able to view pending orders
 15. As a seller, I want to be able to mark an order as shipped
-16. As the system, provide a webhook to automatically mark an order as shipped
 
 Stretch Goals:
 
-1. As a user, I want to be able to search for listings
-2. As a user, I want to be able to filter listings
-3. As a user, I want to be able to review a product
-4. As a user, I want to be able to add a product to my wishlist
-5. As a user, I want to fill out checkout form with my address and payment information
+1. As the system, provide a webhook to automatically mark an order as shipped
+2. As a user, I want to be able to search for listings
+3. As a user, I want to be able to filter listings
+4. As a user, I want to be able to review a product
+5. As a user, I want to be able to add a product to my wishlist
+6. As a user, I want to fill out a checkout form with my address and payment information
 
 ## Technologies
 
@@ -66,3 +66,4 @@ Stretch Goals:
 - Monitoring
 - Caching
 - Keyboard Shortcuts
+- Form Validation

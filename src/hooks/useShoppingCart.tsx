@@ -1,12 +1,9 @@
 import { useCookies } from "react-cookie";
 
 export const useShoppingCart = () => {
-  // TODO: add support for cookies, so that refreshing doesn't reset state
   const [cookies, setCookie] = useCookies(["shopping-cart"]);
 
   const items: string[] = cookies["shopping-cart"] ?? [];
-
-  // used to trick nextjs into client-side rendering
 
   const addItem = (item: string) => {
     const items = cookies["shopping-cart"] ?? [];
@@ -15,6 +12,7 @@ export const useShoppingCart = () => {
       path: "/",
     });
   };
+
   const removeItem = (item: string) => {
     const items: string[] = cookies["shopping-cart"] ?? [];
     const index = items.indexOf(item);
@@ -25,5 +23,9 @@ export const useShoppingCart = () => {
     setCookie("shopping-cart", items);
   };
 
-  return { items, removeItem, addItem };
+  const clear = () => {
+    setCookie("shopping-cart", []);
+  };
+
+  return { items, removeItem, addItem, clear };
 };

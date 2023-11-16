@@ -1,8 +1,8 @@
 import { t } from "@/trpc/server/trpc";
 import get from "./get";
-import checkout from "./checkout";
+import list from "./list";
 
 export default t.router({
-  checkout,
+  list,
   get,
 });

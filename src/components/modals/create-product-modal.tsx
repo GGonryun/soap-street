@@ -89,7 +89,7 @@ export const CreateProductModal = forwardRef<
             type="number"
             id="product-quantity"
             value={quantity}
-            onChange={(e) => setQuantity(parseInt(e.target.value))}
+            onChange={(e) => setQuantity(parseInt(e.target.value || "0"))}
           />
         </InputBox>
         <InputBox>
@@ -103,7 +103,7 @@ export const CreateProductModal = forwardRef<
             type="number"
             id="product-price"
             value={price}
-            onChange={(e) => setPrice(parseFloat(e.target.value))}
+            onChange={(e) => setPrice(parseFloat(e.target.value || "0"))}
           />
         </InputBox>
         {!editing && (

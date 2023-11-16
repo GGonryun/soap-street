@@ -50,6 +50,8 @@ model User {
   accounts      Account[]
   sessions      Session[]
   products      Product[]
+  purchases     Purchase[]
+  orders        Order[] @relation("Seller")
 }
 
 model Product {
@@ -61,6 +63,36 @@ model Product {
   imageUrl    String
   sellerId    String
   seller      User     @relation(fields: [sellerId], references: [id], onDelete: Cascade)
+}
+
+enum OrderStatus {
+  PENDING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}
+
+model Purchase {
+  id          String   @id @default(cuid())
+  orders      Order[]   
+  buyerId     String?
+  buyer       User?    @relation(fields: [buyerId], references: [id], onDelete: Cascade) 
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Order {
+  id          String   @id @default(cuid())
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  purchaseId  String
+  purchase    Purchase @relation(fields: [purchaseId], references: [id], onDelete: Cascade)
+  trackingId  String?  
+  status      OrderStatus @default(PENDING)
+  // we'll have an id in the array for each item, if a customer purchased the same product multiple times
+  productIds  String[]
+  sellerId    String
+  seller      User     @relation(name: "Seller", fields: [sellerId], references: [id], onDelete: Cascade)
 }
 
 model VerificationToken {

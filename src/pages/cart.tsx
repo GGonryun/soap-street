@@ -13,9 +13,12 @@ import { useShoppingCart } from "@/hooks/useShoppingCart";
 import { trpc } from "@/trpc/client";
 import { SimpleProductObject } from "@/types/create-product-form";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 export default function Cart() {
+  const { push } = useRouter();
   const cart = useShoppingCart();
+  const completeCheckout = trpc.cart.checkout.useMutation();
 
   // this caches the items locally so that we don't make a request every time the cart changes
   const [items, setItems] = useState<string[]>([]);
@@ -50,8 +53,18 @@ export default function Cart() {
     cart.removeItem(id);
   };
 
+  const handleCheckout = async () => {
+    const purchaseId = await completeCheckout.mutateAsync({
+      productIds: cart.items,
+    });
+
+    cart.clear();
+
+    push(`/checkout/${purchaseId}`);
+  };
+
   return (
-    <Layout title="Login" description="Log in and make purchases">
+    <Layout title="Cart" description="Your shopping cart">
       <Container sx={{ pt: 3 }}>
         <Box display="flex" flexDirection="column" gap={2} pb={2}>
           <ShoppingText>
@@ -59,8 +72,8 @@ export default function Cart() {
           </ShoppingText>
           <ShoppingCartList
             products={merged() ?? []}
-            onCheckout={() => alert("TODO: handle checkout")}
             onRemove={handleRemoveFromCart}
+            onCheckout={handleCheckout}
           />
         </Box>
         <Divider />
