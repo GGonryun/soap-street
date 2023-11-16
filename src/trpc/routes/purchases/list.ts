@@ -1,9 +1,9 @@
 import { privateProcedure, publicProcedure } from "@/trpc/server/trpc";
-import { purchaseSchema, statusSchema } from "@/types/customer-purchases";
+import { purchaseSchema, orderStatusSchema } from "@/types/customer-purchases";
 import { z } from "zod";
 
 export default privateProcedure
-  .output(z.array(purchaseSchema.extend({ status: statusSchema })))
+  .output(z.array(purchaseSchema.extend({ status: orderStatusSchema })))
   .query(async ({ ctx: { db, user } }) => {
     if (!user.id) throw new Error("User not found");
 

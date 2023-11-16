@@ -1,5 +1,5 @@
 import { Layout } from "@/components/layout/layout";
-import { CaptionText } from "@/components/typography/caption-text";
+import { SmallText } from "@/components/typography/small-text";
 import { trpc } from "@/trpc/client";
 import { DetailedOrder } from "@/types/customer-purchases";
 import { ArrowBack } from "@mui/icons-material";
@@ -102,10 +102,5 @@ const OrderCard: FC<
     </Box>
   );
 };
-
-const SmallText = styled(Typography)(({ theme }) => ({
-  color: theme.palette.text.primary,
-  fontSize: "0.7rem",
-}));
 
 export default Purchase;

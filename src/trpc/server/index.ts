@@ -4,6 +4,7 @@ import products from "../routes/products/router";
 import sellers from "../routes/sellers/router";
 import cart from "../routes/cart/router";
 import purchases from "../routes/purchases/router";
+import orders from "../routes/orders/router";
 
 export const appRouter = router({
   users,
@@ -11,6 +12,7 @@ export const appRouter = router({
   sellers,
   cart,
   purchases,
+  orders,
 });
 
 export type AppRouter = typeof appRouter;

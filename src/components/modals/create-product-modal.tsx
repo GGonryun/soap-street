@@ -125,7 +125,7 @@ export const CreateProductModal = forwardRef<
           sx={{ my: 1 }}
           onClick={onSubmit}
         >
-          {editing ? "Edit Product" : "Create Product"}
+          {editing ? "Save Changes" : "Create Product"}
         </SubmissionButton>
         <SubmissionButton
           startIcon={<DeleteOutline />}

@@ -2,20 +2,37 @@ import { z } from "zod";
 import { groupedProductObject } from "./create-product-form";
 import { createdUserResponseSchema } from "./create-user-form";
 
-export const statusSchema = z.enum([
+export const orderStatusSchema = z.enum([
   "PENDING",
   "SHIPPED",
   "CANCELLED",
   "DELIVERED",
-  "RETURNED",
 ]);
 
+export type OrderStatus = z.infer<typeof orderStatusSchema>;
+
+export const orderStatusLabels: Record<OrderStatus, string> = {
+  PENDING: "Pending",
+  SHIPPED: "Shipped",
+  CANCELLED: "Cancelled",
+  DELIVERED: "Delivered",
+};
 export const orderSchema = z.object({
   id: z.string(),
   productIds: z.array(z.string()),
   trackingId: z.string().nullable(),
-  status: statusSchema,
+  status: orderStatusSchema,
 });
+
+export type BasicOrder = z.infer<typeof orderSchema>;
+
+export const editOrderFormSchema = orderSchema.pick({
+  id: true,
+  status: true,
+  trackingId: true,
+});
+
+export type EditOrderForm = z.infer<typeof editOrderFormSchema>;
 
 export const detailedOrderSchema = orderSchema.extend({
   purchaseId: z.string(),
